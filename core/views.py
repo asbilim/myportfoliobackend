@@ -3,13 +3,15 @@ from rest_framework.viewsets import ModelViewSet
 from django.core.mail import send_mail
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAdminUser
 
 class ContactViewSet(ModelViewSet):
 
     serializer_class = ContactSerializer
+    permission_classes = []
 
     def create(self,request):
-        
+
         interest = request.GET.get('interest')
         name = request.GET.get('name')
         email = request.GET.get('email')
@@ -61,3 +63,13 @@ class ContactViewSet(ModelViewSet):
         # Continue with your saving or other tasks...
 
 
+
+    def get_permissions(self):
+
+        permissions = []
+        
+        if self.action != "create" :
+
+            permissions = [IsAdminUser]
+
+        return [permission() for permission in permissions]
