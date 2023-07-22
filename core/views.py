@@ -49,8 +49,8 @@ class ContactViewSet(ModelViewSet):
             send_mail(
                 email_subject,  # Subject
                 email_body,     # Message
-                'from@example.com',  # From
-                ['to@example.com'],  # To
+                'info@paullilian.dev',  # From
+                ['bilimdepaullilian@gmail.com'],  # To
                 fail_silently=False,
             )
         
